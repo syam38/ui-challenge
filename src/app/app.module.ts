@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
-import { MatDatepickerModule } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,10 @@ import { MatDatepickerModule } from '@angular/material';
     AppRoutingModule,
     SatDatepickerModule,
     SatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

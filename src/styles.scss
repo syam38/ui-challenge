@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import '~saturn-datepicker/theming';
+
+@include mat-core();
+
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+@include sat-datepicker-theme($dark-theme);
