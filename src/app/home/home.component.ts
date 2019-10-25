@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  options: string[] = ['test', 'test2'];
   constructor() { }
-
+  
   ngOnInit() {
   }
 
+  filterOptions(inputValue: string) {
+    console.log()
+  }
 }

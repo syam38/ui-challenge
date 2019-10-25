@@ -1,8 +1,13 @@
 <mat-form-field>
-    <input matInput
-        placeholder="Choose a date"
-        [satDatepicker]="picker"
-        [value]="date">
+    <mat-label>Select customer</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let option of options" [value]="food">
+            {{food}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <input matInput placeholder="Choose a date range" [satDatepicker]="picker" [value]="date">
     <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
     <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-  </mat-form-field>
+</mat-form-field>
