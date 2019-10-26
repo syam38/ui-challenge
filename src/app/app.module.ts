@@ -9,7 +9,7 @@ import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store/reducers';
+import { appReducer } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
 
@@ -30,13 +30,7 @@ import { AppEffects } from './store/effects/app.effects';
     MatSelectModule,
     FormsModule,
     MatButtonModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
+    StoreModule.forRoot({'appState': appReducer}),
     EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
