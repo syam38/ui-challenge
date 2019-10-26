@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AppEffects } from './store/effects/app.effects';
     FormsModule,
     MatButtonModule,
     StoreModule.forRoot({'appState': appReducer}),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

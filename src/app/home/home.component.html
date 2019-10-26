@@ -3,8 +3,8 @@
         <mat-form-field>
             <mat-label>Select customer</mat-label>
             <mat-select required ngModel name="customer">
-                <mat-option  *ngFor="let option of options" [value]="option" >
-                    {{option}}
+                <mat-option  *ngFor="let option of options" [value]="option.id" >
+                    {{option.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

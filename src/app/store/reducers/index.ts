@@ -12,16 +12,24 @@ import { environment } from '../../../environments/environment';
 import { ICustomer } from 'src/app/models/customer';
 import { ICustomerOrder } from 'src/app/models/customer-order';
 import { fetchCustomersSuccess, fetchCustomersFailure, fetchCustomerOdersSuccess, fetchCustomerOdersFailure } from '../actions';
+import { state } from '@angular/animations';
 
-export interface State {
+export interface AppState {
   customers: ICustomer[];
   customerOders: ICustomerOrder[]
 }
 
-const initialState: State = {
+const initialState: AppState = {
   customers: [],
   customerOders: []
 }
+
+export const selectAppState = createFeatureSelector<AppState>('appState');
+
+export const getCustomers = createSelector(
+  selectAppState,
+  (state: AppState) => state.customers
+);
 
 const _appReducer = createReducer(initialState,
   on(fetchCustomersSuccess, (state, { payload }) => ({ ...state, customers: payload.customers })),
