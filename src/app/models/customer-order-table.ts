@@ -7,6 +7,7 @@ export class CustomerOrderTable {
     orderedDate: Date;
     deliveryDetails: string;
     itemNames: string;
+    totalChargeForDelivery = 0;
 
     constructor(customerOrder: ICustomerOrder) {
         this.recipientName = customerOrder.recipient.name;
@@ -15,6 +16,7 @@ export class CustomerOrderTable {
         this.orderedDate = new Date(customerOrder.created_at);
         this.deliveryDetails = customerOrder.delivery.courier + ' (' + customerOrder.delivery.courier + ')';
         this.itemNames = this.getAllItemNames(customerOrder.items)
+        this.totalChargeForDelivery += parseFloat(customerOrder.charge_customer.total_price);
     }
 
     getTotalPrice(items: IItem[]): number {

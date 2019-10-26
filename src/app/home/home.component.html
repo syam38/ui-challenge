@@ -20,5 +20,12 @@
         </div>
     </form>
 </div>
-
+<ng-container *ngIf="form.submitted">
+    <div class="order-summary">
+        <div>Date range: {{dateRange}}</div>
+        <div>Total number of days : {{totalNumberOfDaysSelected}}</div>
+        <div> Number of orders: {{orderCount}} </div>
+        <div>Total price: {{finalPrice}}</div>
+    </div>
 <app-customer-orders [data]="customerOrders"></app-customer-orders>
+</ng-container>
