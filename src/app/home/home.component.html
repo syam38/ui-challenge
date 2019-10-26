@@ -1,13 +1,18 @@
-<mat-form-field>
-    <mat-label>Select customer</mat-label>
-    <mat-select>
-        <mat-option *ngFor="let option of options" [value]="food">
-            {{food}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<mat-form-field>
-    <input matInput placeholder="Choose a date range" [satDatepicker]="picker" [value]="date">
-    <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
-    <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-</mat-form-field>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="form-container">
+        <mat-form-field>
+            <mat-label>Select customer</mat-label>
+            <mat-select required ngModel name="customer">
+                <mat-option  *ngFor="let option of options" [value]="option" >
+                    {{option}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date" name="daterange" required>
+            <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+            <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+        </mat-form-field>
+        <button class="submit-button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
+    </div>
+</form>
