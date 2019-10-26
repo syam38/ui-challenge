@@ -9,9 +9,9 @@ import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
+import { AppEffects } from './store/effects/app.effects';
 
 @NgModule({
   declarations: [
