@@ -5,19 +5,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
-import { appReducer } from './store/reducers';
+import { StoreModule, State, ActionReducer, MetaReducer } from '@ngrx/store';
+import { appReducer, AppState } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/effects/app.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
+import { environment } from 'src/environments/environment';
+
+// console.log all actions
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function(state, action) {
+    console.log('state', state);
+    console.log('action', action);
+    return reducer(state, action);
+  };
+}
+ 
+export const metaReducers: MetaReducer<any>[] = environment.production ? []: [debug];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CustomerOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +45,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     FormsModule,
     MatButtonModule,
-    StoreModule.forRoot({'appState': appReducer}),
+    StoreModule.forRoot({ 'appState': appReducer }, { metaReducers }),
     EffectsModule.forRoot([AppEffects]),
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

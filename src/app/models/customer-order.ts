@@ -12,11 +12,11 @@ interface IRecipient {
     email: string;
 }
 
-interface IItem {
+export interface IItem {
     id: string;
     name: string;
     quantity: number;
-    total_price: ITotalPrice[];
+    total_price: ITotalPrice;
 }
 
 interface ITotalPrice {

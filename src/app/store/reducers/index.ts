@@ -37,7 +37,7 @@ export const getCustomerOrders = createSelector(
 const _appReducer = createReducer(initialState,
   on(fetchCustomersSuccess, (state, { payload }) => ({ ...state, customers: payload.customers })),
   on(fetchCustomersFailure, (state, { payload }) => ({ ...state, err: payload.error, customers:[] })),
-  on(fetchCustomerOrdersSuccess, (state, { payload }) => ({ ...state, customerOders: payload.customerOrders })),
+  on(fetchCustomerOrdersSuccess, (state, { payload }) => ({ ...state, customerOrders: payload.customerOrders })),
   on(fetchCustomerOrdersFailure, (state, { payload }) => ({ ...state, err: payload.error, customerOrders:[] })),
 );
 

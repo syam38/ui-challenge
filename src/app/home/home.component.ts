@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { fetchCustomers, fetchCustomerOrders } from '../store/actions';
 import { ICustomer } from '../models/customer';
 import { ICustomerOrder } from '../models/customer-order';
+import { CustomerOrderTable } from '../models/customer-order-table';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { ICustomerOrder } from '../models/customer-order';
 export class HomeComponent implements OnInit {
 
   options: ICustomer[];
-  customerOrders: ICustomerOrder[];
+  customerOrders: CustomerOrderTable[];
   constructor(private store$: Store<AppState>) { }
 
   ngOnInit() {
@@ -24,16 +25,15 @@ export class HomeComponent implements OnInit {
         this.options = customers;
       }
     })
-    this.store$.pipe(select(getCustomerOrders)).subscribe((customerOders: ICustomerOrder[]) => {
-      if (customerOders.length > 0) {
-        this.customerOrders = customerOders;
+    this.store$.pipe(select(getCustomerOrders)).subscribe((customerOrders: ICustomerOrder[]) => {
+      if (customerOrders.length > 0) {
+        this.customerOrders = customerOrders.map((co) => new CustomerOrderTable(co));
       }
     })
 
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
     const customerId = form.value.customerId;
     const startDate = form.value.daterange.begin;
     const endDate = form.value.daterange.end;

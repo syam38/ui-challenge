@@ -1,18 +1,24 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-    <div class="form-container">
-        <mat-form-field>
-            <mat-label>Select customer</mat-label>
-            <mat-select required ngModel name="customerId">
-                <mat-option  *ngFor="let option of options" [value]="option.id" >
-                    {{option.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date" name="daterange" required>
-            <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
-            <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-        </mat-form-field>
-        <button class="submit-button" type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
-    </div>
-</form>
+<div class="form-container">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-content">
+            <mat-form-field>
+                <mat-label>Select customer</mat-label>
+                <mat-select required ngModel name="customerId">
+                    <mat-option *ngFor="let option of options" [value]="option.id">
+                        {{option.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date"
+                    name="daterange" required>
+                <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+                <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+            </mat-form-field>
+            <button class="submit-button" type="submit" mat-raised-button color="primary"
+                [disabled]="!form.valid">Submit</button>
+        </div>
+    </form>
+</div>
+
+<app-customer-orders [data]="customerOrders"></app-customer-orders>
