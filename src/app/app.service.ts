@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ICustomer } from './models/customer';
+import { ICustomerOrder } from './models/customer-order';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +14,12 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getCustomers() {
-    return this.http.get(this.customersUrl);
+  getCustomers(): Observable<ICustomer[]> {
+    return this.http.get<ICustomer[]>(this.customersUrl);
   }
 
-  getCustomerOrders(customerId: number, startDate: Date, endDate: Date) {
-    return this.http.get(this.customersUrl + '/'+ customerId, {
+  getCustomerOrders(customerId: number, startDate: Date, endDate: Date) :  Observable<ICustomerOrder[]>{
+    return this.http.get<ICustomerOrder[]>(this.customersUrl + '/'+ customerId, {
       params: {
         start_date: startDate.toISOString(),
         end_date: endDate.toISOString()
