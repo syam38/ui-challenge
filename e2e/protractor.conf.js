@@ -25,7 +25,6 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
-    browser.manage().window().setSize(1600, 1000);
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.json')
     });
