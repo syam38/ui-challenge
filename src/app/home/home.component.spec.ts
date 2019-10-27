@@ -20,7 +20,7 @@ import { CustomerOrderTable } from '../models/customer-order-table';
 import { fetchCustomers, fetchCustomerOrders } from '../store/actions';
 import { IFilter } from '../models/filter';
 
-fdescribe('HomeComponent', () => {
+describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let store: Store<AppState>
