@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppState, getCustomers, getCustomerOrders } from '../store/reducers';
 import { Store, select } from '@ngrx/store';
@@ -7,13 +7,15 @@ import { ICustomer } from '../models/customer';
 import { ICustomerOrder } from '../models/customer-order';
 import { CustomerOrderTable } from '../models/customer-order-table';
 import { IFilter } from '../models/filter';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   customers: ICustomer[];
   customerOrders: CustomerOrderTable[];
@@ -21,11 +23,13 @@ export class HomeComponent implements OnInit {
   orderCount: number;
   totalNumberOfDaysSelected: number;
   finalPrice: number;
+  destroy$ = new Subject();
+
   constructor(private store$: Store<AppState>) { }
 
   ngOnInit() {
     this.store$.dispatch(fetchCustomers());
-    this.store$.pipe(select(getCustomers)).subscribe((customers: ICustomer[]) => {
+    this.store$.pipe(takeUntil(this.destroy$),select(getCustomers)).subscribe((customers: ICustomer[]) => {
       if (customers.length > 0) {
         this.customers = customers;
       }
@@ -57,6 +61,11 @@ export class HomeComponent implements OnInit {
     }));
     this.dateRange = filterValues.dateRange.begin.toLocaleDateString() + '-' +  filterValues.dateRange.end.toLocaleDateString(); 
     this.totalNumberOfDaysSelected = (new Date(filterValues.dateRange.begin).getTime() - new Date(filterValues.dateRange.end).getTime())/(1000 * 3600 * 24);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }
