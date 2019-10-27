@@ -13,7 +13,8 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {'args': ['--window-size=1690,1000'] }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -24,6 +25,7 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
+    browser.manage().window().setSize(1600, 1000);
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.json')
     });

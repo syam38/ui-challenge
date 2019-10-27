@@ -8,16 +8,14 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to byrd-challenge!');
+  it('should display table on submitting the form', async() => {
+    await page.navigateTo();
+    await page.clickOnCustomerSelectorDropDown();
+    await page.selectOption(0);
+    await page.selectDateRange();
+    await page.clickOnSubmit();
+    const isTableRendered = await page.isTableRendered();
+    expect(isTableRendered).toBeTruthy();
   });
 
-  afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
-  });
 });

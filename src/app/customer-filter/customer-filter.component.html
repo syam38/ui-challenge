@@ -9,12 +9,12 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date"
+            <input id="daterange" matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date"
                 name="daterange" required>
             <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
             <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
         </mat-form-field>
-        <button class="submit-button" type="submit" mat-raised-button color="primary"
+        <button class="submit-button" id="submitButton" type="submit" mat-raised-button color="primary"
             [disabled]="!form.valid">Submit</button>
     </div>
 </form>
