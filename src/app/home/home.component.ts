@@ -6,6 +6,7 @@ import { fetchCustomers, fetchCustomerOrders } from '../store/actions';
 import { ICustomer } from '../models/customer';
 import { ICustomerOrder } from '../models/customer-order';
 import { CustomerOrderTable } from '../models/customer-order-table';
+import { IFilter } from '../models/filter';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { CustomerOrderTable } from '../models/customer-order-table';
 })
 export class HomeComponent implements OnInit {
 
-  options: ICustomer[];
+  customers: ICustomer[];
   customerOrders: CustomerOrderTable[];
   dateRange: string;
   orderCount: number;
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.store$.dispatch(fetchCustomers());
     this.store$.pipe(select(getCustomers)).subscribe((customers: ICustomer[]) => {
       if (customers.length > 0) {
-        this.options = customers;
+        this.customers = customers;
       }
     })
     this.store$.pipe(select(getCustomerOrders)).subscribe((customerOrders: ICustomerOrder[]) => {
@@ -46,19 +47,16 @@ export class HomeComponent implements OnInit {
 
   }
 
-  onSubmit(form: NgForm) {
-    console.log('form', form);
-    const customerId = form.value.customerId;
-    const startDate: Date = form.value.daterange.begin;
-    const endDate: Date = form.value.daterange.end;
-    this.dateRange = startDate.toLocaleDateString() + '-' +  endDate.toLocaleDateString(); 
-    this.totalNumberOfDaysSelected = (new Date(form.value.daterange.end).getTime() - new Date(form.value.daterange.begin).getTime())/(1000 * 3600 * 24);
+  getCustomerOrders(filterValues: IFilter) {
     this.store$.dispatch(fetchCustomerOrders({
       payload: {
-        customerId: customerId,
-        startDate: startDate,
-        endDate: endDate
+        customerId: filterValues.customerId,
+        startDate: filterValues.dateRange.begin,
+        endDate: filterValues.dateRange.end
       }
     }));
+    this.dateRange = filterValues.dateRange.begin.toLocaleDateString() + '-' +  filterValues.dateRange.end.toLocaleDateString(); 
+    this.totalNumberOfDaysSelected = (new Date(filterValues.dateRange.begin).getTime() - new Date(filterValues.dateRange.end).getTime())/(1000 * 3600 * 24);
   }
+
 }

@@ -7,7 +7,7 @@ import { ICustomerOrder } from '../models/customer-order';
   templateUrl: './customer-orders.component.html',
   styleUrls: ['./customer-orders.component.scss']
 })
-export class CustomerOrdersComponent implements OnInit, OnChanges {
+export class CustomerOrdersComponent implements OnChanges {
   displayedColumns = ['recipientName', 'emailAddress', 'totalPrice', 'orderedDate', 'itemNames', 'deliveryDetails'];
   dataSource: MatTableDataSource<ICustomerOrder>;
   @Input() data: ICustomerOrder[];
@@ -23,10 +23,5 @@ export class CustomerOrdersComponent implements OnInit, OnChanges {
       this.noData = true;
     }
   }
-
-  ngOnInit() {
-    this.noData = false;
-  }
-
 
 }

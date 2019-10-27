@@ -15,6 +15,7 @@ import { AppEffects } from './store/effects/app.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 import { environment } from 'src/environments/environment';
+import { CustomerFilterComponent } from './customer-filter/customer-filter.component';
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -31,7 +32,8 @@ export const metaReducers: MetaReducer<any>[] = environment.production ? []: [de
   declarations: [
     AppComponent,
     HomeComponent,
-    CustomerOrdersComponent
+    CustomerOrdersComponent,
+    CustomerFilterComponent
   ],
   imports: [
     BrowserModule,

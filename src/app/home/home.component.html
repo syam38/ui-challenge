@@ -1,31 +1,15 @@
 <div class="form-container">
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-        <div class="form-content">
-            <mat-form-field>
-                <mat-label>Select customer</mat-label>
-                <mat-select required ngModel name="customerId">
-                    <mat-option *ngFor="let option of options" [value]="option.id">
-                        {{option.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date"
-                    name="daterange" required>
-                <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
-                <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-            </mat-form-field>
-            <button class="submit-button" type="submit" mat-raised-button color="primary"
-                [disabled]="!form.valid">Submit</button>
-        </div>
-    </form>
+    <app-customer-filter [customers]="customers" (emitfilterValues)="getCustomerOrders($event)"></app-customer-filter>
 </div>
-<ng-container *ngIf="form.submitted">
+<ng-container *ngIf="customerOrders?.length > 0">
     <div class="order-summary">
         <div>Date range: {{dateRange}}</div>
         <div>Total number of days : {{totalNumberOfDaysSelected}}</div>
         <div> Number of orders: {{orderCount}} </div>
         <div>Total price: {{finalPrice}}</div>
     </div>
-<app-customer-orders [data]="customerOrders"></app-customer-orders>
+    <app-customer-orders [data]="customerOrders"></app-customer-orders>
+</ng-container>
+<ng-container *ngIf="customerOrders?.length === 0">
+    <p>There is no data for this filter</p>
 </ng-container>
