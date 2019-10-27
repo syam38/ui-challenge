@@ -1,9 +1,12 @@
-.form-container {
+
+.filter-summary-content {
   margin-bottom: 50px;
-}
-.order-summary {
-  margin: 0 auto;
-  width: 20%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  .form-container {
+   margin-right: 50px;
+  }
 }
 
 
