@@ -18,8 +18,8 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-  customers: [],
-  customerOrders: []
+  customers: localStorage.getItem('customers') ? JSON.parse(localStorage.getItem('customers')) : [],
+  customerOrders: localStorage.getItem('customerOrders') ? JSON.parse(localStorage.getItem('customerOrders')) : []
 }
 
 export const selectAppState = createFeatureSelector<AppState>('appState');

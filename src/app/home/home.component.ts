@@ -28,14 +28,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private store$: Store<AppState>) { }
 
   ngOnInit() {
-    this.store$.dispatch(fetchCustomers());
-    this.store$.pipe(takeUntil(this.destroy$),select(getCustomers)).subscribe((customers: ICustomer[]) => {
+    this.store$.pipe(takeUntil(this.destroy$), select(getCustomers)).subscribe((customers: ICustomer[]) => {
       if (customers.length > 0) {
         this.customers = customers;
+        localStorage.setItem('customers', JSON.stringify(customers));
       }
     })
     this.store$.pipe(select(getCustomerOrders)).subscribe((customerOrders: ICustomerOrder[]) => {
       if (customerOrders.length > 0) {
+        localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
         let totalItemPrice = 0;
         let totalDeliveryPrice = 0;
         this.customerOrders = customerOrders.map((co) => {
@@ -48,7 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.finalPrice = totalItemPrice + totalDeliveryPrice;
       }
     })
-
+    if (!(this.customers && this.customers.length > 0)) {
+      this.store$.dispatch(fetchCustomers());
+    }
   }
 
   getCustomerOrders(filterValues: IFilter) {
@@ -59,8 +62,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         endDate: filterValues.dateRange.end
       }
     }));
-    this.dateRange = filterValues.dateRange.begin.toLocaleDateString() + '-' +  filterValues.dateRange.end.toLocaleDateString(); 
-    this.totalNumberOfDaysSelected = (new Date(filterValues.dateRange.begin).getTime() - new Date(filterValues.dateRange.end).getTime())/(1000 * 3600 * 24);
+    this.dateRange = filterValues.dateRange.begin.toLocaleDateString() + '-' + filterValues.dateRange.end.toLocaleDateString();
+    this.totalNumberOfDaysSelected = (new Date(filterValues.dateRange.begin).getTime() - new Date(filterValues.dateRange.end).getTime()) / (1000 * 3600 * 24);
   }
 
   ngOnDestroy() {
