@@ -8,7 +8,7 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display table on submitting the form', async() => {
+  it('should display table on submitting the form', async () => {
     await page.navigateTo();
     await page.clickOnCustomerSelectorDropDown();
     await page.selectOption(0);

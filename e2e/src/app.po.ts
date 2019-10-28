@@ -12,7 +12,7 @@ export class AppPage {
   }
 
   selectOption(optionIndex: number) {
-    return browser.actions().mouseMove(element(By.id('mat-select-'+ optionIndex)).element(By.tagName('span'))).click().perform();
+    return browser.actions().mouseMove(element(By.id('mat-select-' + optionIndex)).element(By.tagName('span'))).click().perform();
   }
 
   selectDateRange() {

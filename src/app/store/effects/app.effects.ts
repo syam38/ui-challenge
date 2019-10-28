@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AppService } from 'src/app/app.service';
-import { fetchCustomers, fetchCustomersSuccess, fetchCustomersFailure, fetchCustomerOrders, fetchCustomerOrdersSuccess, fetchCustomerOrdersFailure } from '../actions';
+import {
+  fetchCustomers, fetchCustomersSuccess,
+  fetchCustomersFailure, fetchCustomerOrders, fetchCustomerOrdersSuccess, fetchCustomerOrdersFailure
+} from '../actions';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -18,9 +21,9 @@ export class AppEffects {
     catchError((error) => {
       return of(fetchCustomersFailure({
         payload: {
-          error: error
+          error
         }
-      }))
+      }));
     })
   ));
 
@@ -35,9 +38,9 @@ export class AppEffects {
     catchError((error) => {
       return of(fetchCustomerOrdersFailure({
         payload: {
-          error: error
+          error
         }
-      }))
+      }));
     })
   ));
 

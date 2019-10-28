@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_end_point:'https://private-anon-2d61f5c37c-byrd1.apiary-mock.com'
+  api_end_point: 'https://private-anon-2d61f5c37c-byrd1.apiary-mock.com'
 };
 
 /*

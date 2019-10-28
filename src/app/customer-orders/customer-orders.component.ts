@@ -17,7 +17,7 @@ export class CustomerOrdersComponent implements OnChanges {
   ngOnChanges() {
     if (this.data && this.data.length > 0) {
       this.dataSource = new MatTableDataSource(this.data);
-    } 
+    }
   }
 
 }

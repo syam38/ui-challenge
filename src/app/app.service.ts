@@ -18,8 +18,8 @@ export class AppService {
     return this.http.get<ICustomer[]>(this.customersUrl);
   }
 
-  getCustomerOrders(customerId: string, startDate: Date, endDate: Date) :  Observable<ICustomerOrder[]>{
-    return this.http.get<ICustomerOrder[]>(this.customerOrdersUrl + '/'+ customerId, {
+  getCustomerOrders(customerId: string, startDate: Date, endDate: Date): Observable<ICustomerOrder[]> {
+    return this.http.get<ICustomerOrder[]>(this.customerOrdersUrl + '/' + customerId, {
       params: {
         start_date: startDate.toISOString(),
         end_date: endDate.toISOString()

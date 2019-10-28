@@ -3,7 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { CustomerOrdersComponent } from '../customer-orders/customer-orders.component';
 import { CustomerFilterComponent } from '../customer-filter/customer-filter.component';
-import { MatTableModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule } from '@angular/material';
+import {
+  MatTableModule, MatDatepickerModule, MatFormFieldModule,
+  MatInputModule, MatSelectModule, MatButtonModule
+} from '@angular/material';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { FormsModule } from '@angular/forms';
 import { StoreModule, Store, createAction } from '@ngrx/store';
@@ -23,7 +26,7 @@ import { IFilter } from '../models/filter';
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
-  let store: Store<AppState>
+  let store: Store<AppState>;
   let storeSpy;
   let appService: AppService;
 
@@ -37,23 +40,23 @@ describe('HomeComponent', () => {
 
   const customerOrdersResponse: ICustomerOrder[] = [
     {
-      id: "order-1",
+      id: 'order-1',
       recipient: {
-        name: "John Smith",
-        email: "j.smith@notgmail.com"
+        name: 'John Smith',
+        email: 'j.smith@notgmail.com'
       },
-      created_at: "2018-11-01T09:42:30Z",
+      created_at: '2018-11-01T09:42:30Z',
       delivery: {
-        courier: "DPP", method: "Express"
+        courier: 'DPP', method: 'Express'
       },
       items: [{
-        id: "item-1",
-        name: "Supersoaker 3000",
+        id: 'item-1',
+        name: 'Supersoaker 3000',
         quantity: 2,
-        total_price: { currency: "EUR", amount: "24.33" }
+        total_price: { currency: 'EUR', amount: '24.33' }
       }
       ],
-      charge_customer: { currency: "EUR", total_price: "18.00" }
+      charge_customer: { currency: 'EUR', total_price: '18.00' }
     }
   ];
 
@@ -74,7 +77,7 @@ describe('HomeComponent', () => {
         MatSelectModule,
         FormsModule,
         MatButtonModule,
-        StoreModule.forRoot({ 'appState': appReducer }),
+        StoreModule.forRoot({ appState: appReducer }),
         EffectsModule.forRoot([AppEffects]),
         NoopAnimationsModule,
         HttpClientTestingModule
@@ -124,7 +127,8 @@ describe('HomeComponent', () => {
     }));
   });
 
-  it('should set the component\'s "customerOrders" variable with the transformed data from AppService\'s getCustomerOrders on getCustomerOrders function call', () => {
+  it(`should set the component\'s "customerOrders" variable with the
+   transformed data from AppService\'s getCustomerOrders on getCustomerOrders function call`, () => {
     component.getCustomerOrders({
       customerId: 'cust-1',
       dateRange: {

@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./customer-filter.component.scss']
 })
 export class CustomerFilterComponent implements OnChanges {
-  @Input() customers: ICustomer[]
+  @Input() customers: ICustomer[];
   options: ICustomer[];
   @Output() emitfilterValues: EventEmitter<IFilter> = new EventEmitter();
   filterValues: IFilter;

@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.customers = customers;
         localStorage.setItem('customers', JSON.stringify(customers));
       }
-    })
+    });
     this.store$.pipe(select(getCustomerOrders)).subscribe((customerOrders: ICustomerOrder[]) => {
       if (customerOrders.length > 0) {
         localStorage.setItem('customerOrders', JSON.stringify(customerOrders));
@@ -42,13 +42,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.customerOrders = customerOrders.map((co) => {
           const a = new CustomerOrderTable(co);
           totalItemPrice += a.totalPrice;
-          totalDeliveryPrice += parseInt(co.charge_customer.total_price)
+          totalDeliveryPrice += parseInt(co.charge_customer.total_price, 10);
           return a;
         });
         this.orderCount = this.customerOrders.length;
         this.finalPrice = totalItemPrice + totalDeliveryPrice;
       }
-    })
+    });
     if (!(this.customers && this.customers.length > 0)) {
       this.store$.dispatch(fetchCustomers());
     }

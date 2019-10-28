@@ -14,14 +14,14 @@ import { fetchCustomersSuccess, fetchCustomersFailure, fetchCustomerOrdersFailur
 
 export interface AppState {
   customers: ICustomer[];
-  customerOrders: ICustomerOrder[]
+  customerOrders: ICustomerOrder[];
 }
 
 // sets the initial state to previous app state if it is present in the local storage
 const initialState: AppState = {
   customers: localStorage.getItem('customers') ? JSON.parse(localStorage.getItem('customers')) : [],
   customerOrders: localStorage.getItem('customerOrders') ? JSON.parse(localStorage.getItem('customerOrders')) : []
-}
+};
 
 export const selectAppState = createFeatureSelector<AppState>('appState');
 
@@ -35,13 +35,13 @@ export const getCustomerOrders = createSelector(
   (state: AppState) => state.customerOrders
 );
 
-const _appReducer = createReducer(initialState,
+const reducer = createReducer(initialState,
   on(fetchCustomersSuccess, (state, { payload }) => ({ ...state, customers: payload.customers })),
-  on(fetchCustomersFailure, (state, { payload }) => ({ ...state, err: payload.error, customers:[] })),
+  on(fetchCustomersFailure, (state, { payload }) => ({ ...state, err: payload.error, customers: [] })),
   on(fetchCustomerOrdersSuccess, (state, { payload }) => ({ ...state, customerOrders: payload.customerOrders })),
-  on(fetchCustomerOrdersFailure, (state, { payload }) => ({ ...state, err: payload.error, customerOrders:[] })),
+  on(fetchCustomerOrdersFailure, (state, { payload }) => ({ ...state, err: payload.error, customerOrders: [] })),
 );
 
 export function appReducer(state, action) {
-  return _appReducer(state, action)
+  return reducer(state, action);
 }

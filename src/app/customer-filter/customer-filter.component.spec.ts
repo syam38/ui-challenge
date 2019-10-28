@@ -21,7 +21,7 @@ describe('CustomerFilterComponent', () => {
         MatDatepickerModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule        
+        NoopAnimationsModule
       ]
     })
     .compileComponents();
