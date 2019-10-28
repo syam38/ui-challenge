@@ -17,6 +17,7 @@ export interface AppState {
   customerOrders: ICustomerOrder[]
 }
 
+// sets the initial state to previous app state if it is present in the local storage
 const initialState: AppState = {
   customers: localStorage.getItem('customers') ? JSON.parse(localStorage.getItem('customers')) : [],
   customerOrders: localStorage.getItem('customerOrders') ? JSON.parse(localStorage.getItem('customerOrders')) : []

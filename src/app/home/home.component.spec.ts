@@ -92,6 +92,7 @@ describe('HomeComponent', () => {
   }));
 
   beforeEach(() => {
+    localStorage.clear();
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -99,10 +100,6 @@ describe('HomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should dispatch fetch customers action on load', () => {
-    expect(storeSpy).toHaveBeenCalledWith(fetchCustomers());
   });
 
   it('should set the component\'s "customers" variable with the data from AppService', () => {
