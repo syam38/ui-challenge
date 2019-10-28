@@ -11,17 +11,13 @@ export class CustomerOrdersComponent implements OnChanges {
   displayedColumns = ['recipientName', 'emailAddress', 'totalPrice', 'orderedDate', 'itemNames', 'deliveryDetails'];
   dataSource: MatTableDataSource<ICustomerOrder>;
   @Input() data: ICustomerOrder[];
-  noData = false;
   constructor() { }
 
 
   ngOnChanges() {
     if (this.data && this.data.length > 0) {
       this.dataSource = new MatTableDataSource(this.data);
-      this.noData = false;
-    } else {
-      this.noData = true;
-    }
+    } 
   }
 
 }
