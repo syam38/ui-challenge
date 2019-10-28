@@ -6,7 +6,7 @@ import { fetchCustomers, fetchCustomerOrders } from '../store/actions';
 import { ICustomer } from '../models/customer';
 import { ICustomerOrder } from '../models/customer-order';
 import { CustomerOrderTable } from '../models/customer-order-table';
-import { IFilter } from '../models/filter';
+import { IFilter, IDateRange } from '../models/filter';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -52,6 +52,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (!(this.customers && this.customers.length > 0)) {
       this.store$.dispatch(fetchCustomers());
     }
+    if (localStorage.getItem('selectedDateRange')) {
+      const selectedDateRange: IDateRange = JSON.parse(localStorage.getItem('selectedDateRange'));
+      this.setDateRangeAndDays({
+        begin: new Date(selectedDateRange.begin),
+        end: new Date(selectedDateRange.end)
+      });
+    }
   }
 
   getCustomerOrders(filterValues: IFilter) {
@@ -62,8 +69,12 @@ export class HomeComponent implements OnInit, OnDestroy {
         endDate: filterValues.dateRange.end
       }
     }));
-    this.dateRange = filterValues.dateRange.begin.toLocaleDateString() + '-' + filterValues.dateRange.end.toLocaleDateString();
-    this.totalNumberOfDaysSelected = (new Date(filterValues.dateRange.begin).getTime() - new Date(filterValues.dateRange.end).getTime()) / (1000 * 3600 * 24);
+    this.setDateRangeAndDays(filterValues.dateRange);
+  }
+
+  setDateRangeAndDays(dateRange: IDateRange) {
+    this.dateRange = dateRange.begin.toLocaleDateString() + '-' + dateRange.end.toLocaleDateString();
+    this.totalNumberOfDaysSelected = (new Date(dateRange.end).getTime() - new Date(dateRange.begin).getTime()) / (1000 * 3600 * 24);
   }
 
   ngOnDestroy() {

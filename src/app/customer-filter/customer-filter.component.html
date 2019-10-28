@@ -1,20 +1,20 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<form #form="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-content">
         <mat-form-field>
             <mat-label>Select customer</mat-label>
-            <mat-select required ngModel name="customerId">
-                <mat-option *ngFor="let option of options" [value]="option.id">
+            <mat-select required [(value)]="selectedCustomer" name="customerId">
+                <mat-option *ngFor="let option of options" [value]="option">
                     {{option.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input id="daterange" matInput placeholder="Choose a date range" [satDatepicker]="picker" ngModel [value]="date"
+            <input id="daterange" matInput placeholder="Choose a date range" [satDatepicker]="picker" [(ngModel)]="date"
                 name="daterange" required>
             <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
             <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
         </mat-form-field>
         <button class="submit-button" id="submitButton" type="submit" mat-raised-button color="primary"
-            [disabled]="!form.valid">Submit</button>
+            [disabled]="!form.valid || form.submit">Submit</button>
     </div>
 </form>
